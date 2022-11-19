@@ -1,0 +1,29 @@
+{
+  "name": "zyk-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/bin/index.js",
+  "module": "./dist/bin/index.js",
+  "bin": {
+    "zyk": "./dist/bin/index.js"
+  },
+  "scripts": {
+    "build": "rimraf dist && rollup --config rollup.config.ts --configPlugin typescript"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^23.0.2",
+    "@rollup/plugin-json": "^5.0.1",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-typescript": "^9.0.2",
+    "@types/node": "^18.11.9",
+    "chalk": "^4",
+    "commander": "^9.4.1",
+    "rimraf": "^3.0.2",
+    "rollup": "^3.3.0",
+    "tslib": "^2.4.1",
+    "typescript": "^4.9.3"
+  }
+}
