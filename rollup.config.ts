@@ -5,6 +5,7 @@ import nodeResolve from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
 import commonjs from "@rollup/plugin-commonjs";
 import json from "@rollup/plugin-json";
+import copy from "rollup-plugin-copy";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
@@ -21,6 +22,14 @@ export default () => {
         ignore: ["bufferutil", "utf-8-validate"],
       }),
       json(),
+      copy({
+        targets: [
+          {
+            src: "templates",
+            dest: "dist",
+          },
+        ],
+      }),
     ],
     output: {
       file: path.resolve(__dirname, "dist/bin/index.js"),

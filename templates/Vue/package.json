@@ -1,0 +1,14 @@
+{
+  "name": "vue-typescript-template",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {},
+  "dependencies": {
+    "vue": "^3.2.45"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.4",
+    "vue-tsc": "^1.0.9"
+  }
+}

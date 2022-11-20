@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 import chalk from "chalk";
 import { Command } from "commander";
-// import create from '../create'
+import create from "../main/create";
 import { readFileSync } from "node:fs";
 
 const { version } = JSON.parse(
@@ -15,7 +15,7 @@ program
   .description("create a new project")
   .option("-f --force", "if it exist, overwrite directory")
   .action((name: string, options: any) => {
-    console.log("准备创建的项目名称", name, options);
+    create(name, options);
   });
 
 // 配置版本号信息
@@ -25,7 +25,7 @@ program.version(version).usage("<command> [option]");
 program.on("--help", () => {
   console.log(
     `\r\n Run ${chalk.green(
-      `dyi <command> --help`
+      `zyk <command> --help`
     )} to understand the details \r\n `
   );
 });
