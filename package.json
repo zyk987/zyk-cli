@@ -1,7 +1,7 @@
 {
   "name": "zyk-cli",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.2",
+  "description": "生成 React 或 Vue初始代码，生成 webpack 配置，以及配置 webpack 优化项",
   "main": "./dist/bin/index.js",
   "module": "./dist/bin/index.js",
   "bin": {
@@ -10,7 +10,13 @@
   "scripts": {
     "build": "rimraf dist && rollup --config rollup.config.ts --configPlugin typescript"
   },
-  "keywords": [],
+  "keywords": [
+    "Webpack",
+    "Rollup",
+    "TypeScript",
+    "React",
+    "Vue"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {

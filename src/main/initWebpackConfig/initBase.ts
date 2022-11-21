@@ -19,7 +19,12 @@ const initBabelConfig = (
       }
     ],
     ${type === "React" ? "@babel/preset-react," : ""}
-    "@babel/preset-typescript",
+    [
+      "@babel/preset-typescript",
+      {
+        allExtensions: true,
+      },
+    ],
   ],
   plugins: [${
     isCompatibleDecorator
@@ -126,12 +131,13 @@ ${
     ? `const MiniCssExtractPlugin = require("mini-css-extract-plugin");`
     : ""
 }
+${type === "Vue" ? 'const { VueLoaderPlugin } = require("vue-loader");' : ""}
 
 const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
   entry: path.join(__dirname, ${
-    type === "React" ? "../src/index.tsx" : "../src/main.ts"
+    type === "React" ? `"../src/index.tsx"` : `"../src/main.ts"`
   }),
   output: {
     filename: 'static/js/[name].[contenthash:8].js',
@@ -241,6 +247,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../public/index.html'),
       inject: true,
@@ -248,9 +255,10 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.BASE_ENV': JSON.stringify(process.env.BASE_ENV),
     }),
+    ${type === "Vue" ? "new VueLoaderPlugin()," : ""}
   ],
   resolve: {
-    extensions: [".js", ".tsx", ".ts"],
+    extensions: [".js", ".tsx", ".ts"${type === "Vue" ? ', ".vue"' : ""}],
     alias: { "@": path.join(__dirname, "../src") },
     modules: [path.resolve(__dirname, "../node_modules")],
   },${
