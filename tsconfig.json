@@ -9,7 +9,8 @@
     "declaration": false,
     "sourceMap": false,
     "noUnusedLocals": false,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "experimentalDecorators": true
   },
   "include": ["./src", "./rollup.config.ts"]
 }

@@ -19,14 +19,13 @@ export default () => {
         ...devDependencies,
       });
 
-  const initConfig = `
-const path = require('path');
-const { merge } = require('webpack-merge');
-const baseConfig = require('./webpack.base.js');
+  const initConfig = `const path = require("path");
+const { merge } = require("webpack-merge");
+const baseConfig = require("./webpack.base.js");
 
 module.exports = merge(baseConfig, {
-  mode: 'development',
-  devtool: 'eval-cheap-module-source-map',
+  mode: "development",
+  devtool: "eval-cheap-module-source-map",
   devServer: {
     port: 8080,
     compress: false,
@@ -34,10 +33,10 @@ module.exports = merge(baseConfig, {
     historyApiFallback: true,
     static: {
       directory: path.join(__dirname, "../public"),
-    }
+    },
   },
 });
-  `;
+`;
 
   write("build/webpack.dev.js", initConfig);
 };
