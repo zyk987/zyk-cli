@@ -53,7 +53,8 @@ projectName
 │ ├── App.tsc
 │ ├── index.css
 │ ├── index.tsc
-│ └── logo.svg
+│ ├── logo.svg
+│ └── typings.d.ts
 ├── .browserslistrc
 ├── babel.config.js
 ├── package.json
@@ -78,7 +79,8 @@ projectName
 │ │ └── HelloWorld.vue
 │ ├── App.vue
 │ ├── main.ts
-│ └── style.css
+│ ├── style.css
+│ └── typing.d.ts
 ├── .browserslistrc
 ├── babel.config.js
 ├── package.json

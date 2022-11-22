@@ -72,12 +72,14 @@ export default () => {
     "@babel/core": "^7.20.2",
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.18.6",
+    chalk: "^4.1.2",
     "copy-webpack-plugin": "^11.0.0",
     "babel-loader": "^9.1.0",
     "css-loader": "^6.7.2",
     "html-webpack-plugin": "^5.5.0",
     less: "^4.1.3",
     "less-loader": "^11.1.0",
+    "progress-bar-webpack-plugin": "^2.1.0",
     "style-loader": "^3.3.1",
     "webpack-cli": "^5.0.0",
     "webpack-dev-server": "^4.11.1",
@@ -138,6 +140,8 @@ export default () => {
   const initConfig = `const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const chalk = require("chalk");
+const ProgressBarPlugin = require("progress-bar-webpack-plugin");
 ${
   optimizationItems?.includes("isPulloutCssFile")
     ? `const MiniCssExtractPlugin = require("mini-css-extract-plugin");`
@@ -258,6 +262,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new ProgressBarPlugin({
+      format: \`:msg [:bar] \${chalk.green.bold(":percent")} (:elapsed s)\`,
+    }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../public/index.html'),
       inject: true,
