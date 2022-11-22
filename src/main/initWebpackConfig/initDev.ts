@@ -12,8 +12,8 @@ export default () => {
   type === "React"
     ? pkg.set("devDependencies", {
         ...devDependencies,
-        "webpack-dev-server": "^4.11.1",
-        "webpack-merge": "^5.8.0",
+        "@pmmmwh/react-refresh-webpack-plugin": "^0.5.9",
+        "react-refresh": "^0.14.0",
       })
     : pkg.set("devDependencies", {
         ...devDependencies,
@@ -22,6 +22,11 @@ export default () => {
   const initConfig = `const path = require("path");
 const { merge } = require("webpack-merge");
 const baseConfig = require("./webpack.base.js");
+${
+  type === "React"
+    ? `const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");`
+    : ``
+}
 
 module.exports = merge(baseConfig, {
   mode: "development",
@@ -35,6 +40,11 @@ module.exports = merge(baseConfig, {
       directory: path.join(__dirname, "../public"),
     },
   },
+  plugins: [${
+    type === "React"
+      ? `new ReactRefreshWebpackPlugin(), `
+      : `new webpack.HotModuleReplacementPlugin(),`
+  }],
 });
 `;
 

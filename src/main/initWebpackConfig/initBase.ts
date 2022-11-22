@@ -9,7 +9,9 @@ const initBabelConfig = (
   type: string | undefined,
   isCompatibleDecorator: boolean | undefined
 ) => {
-  const babelConfig = `module.exports = {
+  const babelConfig = `const isDev = process.env.NODE_ENV === "development";
+
+  module.exports = {
   "presets": [
     [
       "@babel/preset-env",
@@ -17,22 +19,32 @@ const initBabelConfig = (
         "useBuiltIns": "usage",
         "corejs": 3,
       }
-    ],
-    ${type === "React" ? "@babel/preset-react," : ""}
+    ],${
+      type === "React"
+        ? `
+    "@babel/preset-react",
+    "@babel/preset-typescript",`
+        : `
     [
       "@babel/preset-typescript",
       {
         allExtensions: true,
       },
-    ],
+    ],`
+    }
   ],
   plugins: [${
     isCompatibleDecorator
       ? `
     ["@babel/plugin-proposal-decorators", { legacy: true }],`
       : ""
+  }${
+    type === "React"
+      ? `
+  isDev && require.resolve("react-refresh/babel"),`
+      : ``
   }
-  ],
+  ].filter(Boolean),
 };
 `;
 
@@ -132,7 +144,6 @@ ${
     : ""
 }
 ${type === "Vue" ? 'const { VueLoaderPlugin } = require("vue-loader");' : ""}
-
 const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
@@ -187,10 +198,10 @@ module.exports = {
         use: [${
           optimizationItems?.includes("isPulloutCssFile")
             ? `
-          isDev ? "style-loader" : MiniCssExtractPlugin.loader,`
+          isDev ? "style-loader" : MiniCssExtractPlugin.loader`
             : `
           "style-loader"`
-        }
+        },
           "css-loader",${
             isCompatibleCss3
               ? `
@@ -247,7 +258,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../public/index.html'),
       inject: true,

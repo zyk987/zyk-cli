@@ -4,7 +4,10 @@
 
 .App-logo {
   height: 40vmin;
-  pointer-events: none;
+}
+
+.App-logo:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -24,8 +27,8 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.App-docs {
+  color: #888;
 }
 
 @keyframes App-logo-spin {
